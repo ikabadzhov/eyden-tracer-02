@@ -21,8 +21,10 @@ public:
 
 	virtual std::optional<Vec3f> Illuminate(Ray& ray) override
 	{
-		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		// Task 2.4.1. calculate the light intensity as in slides (CG05)
+		ray.dir = normalize(m_position - ray.org); // update the ray dir
+        auto intensity = m_intensity / (norm(m_position - ray.org)*norm(m_position - ray.org));
+        return normalize(intensity);
 	}
 
 

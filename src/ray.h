@@ -13,4 +13,8 @@ struct Ray
 	Vec3f		dir;		///< Direction
 	float		t;		///< Current/maximum hit distance
 	const CPrim* 	hit;		///< Pointer to currently closest primitive
+
+	//std::shared_ptr<CPrim> 	hit;
+	// from Problem 2.2.3: after intersection with a primitive =>
+	// => store primitive's adress
 };

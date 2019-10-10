@@ -59,8 +59,18 @@ public:
 
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
-		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+
+
+		// Task 2.3.2:
+		// reference: https://www.khronos.org/opengl/wiki/Calculating_a_Surface_Normal
+		// As the source suggests: For a triangle p1, p2, p3,
+		// if the vector U = p2 - p1 and the vector V = p3 - p1 then the normal N = U X V
+
+		auto U = m_b - m_a;
+		auto V = m_c - m_a;
+
+		return normalize(U.cross(V));
+		//return Vec3f();
 	}
 	
 private:

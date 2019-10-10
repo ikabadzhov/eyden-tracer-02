@@ -1,7 +1,7 @@
 # Practical Assignment 2
 Please put your name (or names if you work in a group) here:  
-**Name**: .......
-## Problem 2.2
+**Name**: Ivan Kabadzhov && Dion Dermaku
+## Problem 2.2 
 ### Encapsulate camera and primitives from main application logic (Points 5)
 1. Fork the current repository
 2. Study the new framework-code of 

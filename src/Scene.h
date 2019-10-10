@@ -27,7 +27,9 @@ public:
 	 */
 	void Add(const std::shared_ptr<CPrim> pPrim)
 	{
-		// --- PUT YOUR CODE HERE ---
+
+		m_vpPrims.push_back(pPrim);
+		// from Problem 2.2.4: use the Add method as a settter
 	}
 	/**
 	 * @brief Adds a new light to the scene
@@ -35,7 +37,10 @@ public:
 	 */
 	void Add(const std::shared_ptr<ILight> pLight)
 	{
-		// --- PUT YOUR CODE HERE ---
+
+		// Problem 2.4.1
+		m_vpLights.push_back(pLight); // push the vector (add elements)
+		//m_vpPrims = pLight;
 	}
   
 	/**
@@ -45,8 +50,20 @@ public:
 	 * @retval false otherwise
 	 */
 	bool Intersect(Ray& ray) const
-	{
-		// --- PUT YOUR CODE HERE ---
+{
+
+		// Problem 2.3.1.
+		int flag = 0;
+		for (auto it = m_vpPrims.begin() ; it != m_vpPrims.end(); ++it)
+		{ // iterate through the primitives
+			if ((*it)->Intersect(ray)){
+				ray.hit = (*it).get();
+				flag++; // flag that there was an intersection of at least one object
+			}
+		}
+		if (flag > 0){
+			return true;
+		}
 		return false;
 	}
 
@@ -56,6 +73,12 @@ public:
 	bool Occluded(Ray& ray)
 	{
 		// --- PUT YOUR CODE HERE ---
+		// 2.5.
+		// check if something blocks the light
+		for(auto prim : m_vpPrims)
+			if(prim->Intersect(ray))
+				return true;
+
 		return false;
 	}
 
@@ -65,8 +88,13 @@ public:
 	 */
 	Vec3f RayTrace(Ray& ray) const
 	{
-		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		// Problem 2.3.1
+		if (Intersect(ray))
+			return ray.hit->getShader()->Shade(ray); // initially was set to white
+		else
+			return m_bgColor; // initially was set to black
+		
+		//return Vec3f();
 	}
 
 
